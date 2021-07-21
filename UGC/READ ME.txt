@@ -1,0 +1,9 @@
+Requirements:
+1. nodemon installed grobally
+
+Steps
+0. Place UGC_Bot in Documents
+1. Open "Command Prompt"
+2. Type "cd Documents\UGC_Bot"
+3. Type "nodemon ./src/bot.js"
+4. Profit
