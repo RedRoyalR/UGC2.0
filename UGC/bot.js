@@ -52,6 +52,7 @@ const Whitelist = [
   "284945768564129793", //void
   "810790148660396032", //void's alt
   "533084050835898379", // Azord
+  "820004668948086854", // My Alt
 ]; // TODO: TO ADD MORE PEOPLE TYPE THEIR ID INSIDE!
 const muteRoleId = "762210494399774730";
 console.log(process.env.DISCORDJS_JS_TOKEN);
@@ -212,7 +213,9 @@ const Insults = [
   `alr what the hell are you doing, why the fucking hell did you insult me for? you have nothing better to do? alr go fuck yourself none fucking gives a damn of who or what you are`,
   `do everyone a fucking favour and get lost, none wants you to exist, not even your fucking family`,
 ];
-const greatings3 = ["hows your day ugc"];
+const greatings3 = [
+  "hows your day ugc"
+]
 const Insults2 = [
   `⠀`,
   `Fuck you`,
@@ -1885,119 +1888,100 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         const element2 = ae[index];
 
         if (element2.toLowerCase() == element.toLowerCase()) {
-          if (
-            ae.includes("ugc") ||
-            ae.includes("UGC") ||
-            ae.includes("Ugc") ||
-            ae.includes("UGc")
-          )
-            Insult(message);
-          return;
+          if (ae.includes("ugc") || ae.includes("UGC") ||ae.includes("Ugc") || ae.includes("UGc") )
+          Insult(message)
+          return
         }
       }
     }
-    if (
-      message.content.toLowerCase() == "hows your day ugc" ||
-      message.content.toLowerCase() == "how's your day ugc" ||
+    if (message.content.toLowerCase() == "hows your day ugc"||
+     message.content.toLowerCase() == "how's your day ugc" ||
       message.content.toLowerCase() == "how is your day ugc" ||
       message.content.toLowerCase() == "how was your day ugc" ||
       message.content.toLowerCase() == "how is it going ugc" ||
       message.content.toLowerCase() == "how is it goin ugc" ||
-      message.content.toLowerCase() == "hows your day ugc?" ||
-      message.content.toLowerCase() == "how's your day ugc?" ||
+
+      message.content.toLowerCase() == "hows your day ugc?"||
+     message.content.toLowerCase() == "how's your day ugc?" ||
       message.content.toLowerCase() == "how is your day ugc?" ||
       message.content.toLowerCase() == "how was your day ugc?" ||
       message.content.toLowerCase() == "how is it going ugc?" ||
       message.content.toLowerCase() == "how is it goin ugc?"
-    ) {
-      const rng2324514 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
-      if (rng2324514 == 1) {
-        message.reply("Good, and you?");
-      } else if (rng2324514 == 2) {
-        message.reply("Fine I guess. And you?");
-      } else if (rng2324514 == 3) {
-        message.reply("Great, how about you?");
-      } else if (rng2324514 == 4) {
-        message.reply("Decent, why do you ask?");
-      } else if (rng2324514 == 5) {
-        message.reply("Normal, what about you?");
-      } else if (rng2324514 == 6) {
-        message.reply("Just a casual day, and your one?");
-      } else if (rng2324514 == 7) {
-        message.reply("Bad, and you.");
-      }
+      ) {
+       const rng2324514 =  Math.trunc(Math.random() * 7) + 1; //formula for getting random number
+        if (rng2324514 == 1) {
+          message.reply("Good, and you?")
+        }else if (rng2324514 == 2) {
+          message.reply("Fine I guess. And you?")
+        }else if (rng2324514 == 3) {
+          message.reply("Great, how about you?")
+        }else if (rng2324514 == 4) {
+          message.reply("Decent, why do you ask?")
+        }else if (rng2324514 == 5) {
+          message.reply("Normal, what about you?")
+        }else if (rng2324514 == 6) {
+          message.reply("Just a casual day, and your one?")
+        }else if (rng2324514 == 7) {
+          message.reply("Bad, and you.")
+        }
+        
+        var listener = messageee  => {
+          if (
+            messageee.author.id != 806760433314562068 &&
+            messageee.author.id != 155149108183695360
+          ) {
+          
 
-      var listener = (messageee) => {
-        if (
-          messageee.author.id != 806760433314562068 &&
-          messageee.author.id != 155149108183695360
-        ) {
           console.log("WORKS YESSSS!");
-          if (messageee.content.toLowerCase().includes("great")) {
-            if (
-              rng2324514 == 7 ||
-              rng2324514 == 6 ||
-              rng2324514 == 5 ||
-              rng2324514 == 4
-            ) {
-              messageee.reply("Good for you.");
-              return client.removeListener("message", listener);
-            } else if (rng2324514 == 3) {
-              messageee.reply("Good to hear.");
-              return client.removeListener("message", listener);
-            } else {
-              messageee.reply("Nice.");
-              return client.removeListener("message", listener);
+          if (messageee.content.toLowerCase().includes("great") ) {
+            if (rng2324514 == 7||rng2324514 == 6|| rng2324514 == 5 || rng2324514 == 4) {
+              messageee.reply("Good for you.")
+              return client.removeListener('message', listener);
+            }else if(rng2324514 == 3) {
+              messageee.reply("Good to hear.")
+              return client.removeListener('message', listener);
+            }else {
+              messageee.reply("Nice.")
+              return client.removeListener('message', listener);
             }
-          } else if (messageee.content.toLowerCase().includes("decent")) {
-            if (
-              rng2324514 == 7 ||
-              rng2324514 == 6 ||
-              rng2324514 == 5 ||
-              rng2324514 == 4
-            ) {
-              messageee.reply("Good.");
-              return client.removeListener("message", listener);
-            } else if (rng2324514 == 3) {
-              messageee.reply("Hope it gets better.");
-              return client.removeListener("message", listener);
-            } else {
-              messageee.reply("Ok.");
-              return client.removeListener("message", listener);
+            
+          }else if (messageee.content.toLowerCase().includes("decent")) {
+            if (rng2324514 == 7||rng2324514 == 6|| rng2324514 == 5 || rng2324514 == 4) {
+              messageee.reply("Good.")
+              return client.removeListener('message', listener);
+            }else if(rng2324514 == 3) {
+              messageee.reply("Hope it gets better.")
+              return client.removeListener('message', listener);
+            }else {
+              messageee.reply("Ok.")
+              return client.removeListener('message', listener);
             }
-          } else if (messageee.content.toLowerCase().includes("normal")) {
-            messageee.reply("Ok.");
-            return client.removeListener("message", listener);
-          } else if (messageee.content.toLowerCase().includes("good")) {
-            messageee.reply("Nice.");
-            return client.removeListener("message", listener);
-          } else if (messageee.content.toLowerCase().includes("bad")) {
+          }else if (messageee.content.toLowerCase().includes("normal")) {
+            messageee.reply("Ok.")
+            return client.removeListener('message', listener);
+          }else if (messageee.content.toLowerCase().includes("good")) {
+            messageee.reply("Nice.")
+            return client.removeListener('message', listener);
+          }else if (messageee.content.toLowerCase().includes("bad")) {
             if (rng2324514 == 4) {
-              if (
-                messageee.content.toLowerCase().includes("no") &&
-                messageee.content.toLowerCase().includes("reason")
-              ) {
-                messageee.reply("Good.");
-                return client.removeListener("message", listener);
-              }
-            } else if (rng2324514 == 7) {
-              messageee.reply("Great to know.");
-              return client.removeListener("message", listener);
-            } else if (rng2324514 == 3) {
-              messageee.reply("Rip, hope it gets better.");
-              return client.removeListener("message", listener);
-            } else {
-              messageee.reply("Ok.");
-              return client.removeListener("message", listener);
+              messageee.reply("Good.")
+              return client.removeListener('message', listener);
+            }else if(rng2324514 == 7) {
+              messageee.reply("Great to know.")
+              return client.removeListener('message', listener);
+            }else if(rng2324514 == 3) {
+              messageee.reply("Rip, hope it gets better.")
+              return client.removeListener('message', listener);
+            }else {
+              messageee.reply("Ok.")
+              return client.removeListener('message', listener);
             }
-          }
+          }  
+        
+          
         }
       };
-      client.on("message", listener);
-      // setTimeout(() => {}, );
-      setTimeout(() => {
-        return client.removeListener("message", listener);
-      }, 2500);
+        client.on('message',listener)
     }
 
     if (message.content.toLowerCase() === "trolley") {
@@ -2009,7 +1993,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
     }
     const args = message.content.trim().substring(PREFIX.length).split(/\s+/);
     // console.log(args);
-
+    
     for (let index = 0; index < args.length; index++) {
       // const user = getUserFromMention(args[index]);
 
