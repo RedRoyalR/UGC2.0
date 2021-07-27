@@ -4,7 +4,7 @@ const commandUsed = new Set(); //to check for someone spamming it
 const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
 let cooldown = true;
-const versionValue = "50.03.02";
+const versionValue = "51.01.06";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
@@ -1910,7 +1910,9 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       message.content.toLowerCase() == "how is your day ugc?" ||
       message.content.toLowerCase() == "how was your day ugc?" ||
       message.content.toLowerCase() == "how is it going ugc?" ||
-      message.content.toLowerCase() == "how is it goin ugc?"
+      message.content.toLowerCase() == "how is it goin ugc?" ||
+      message.content.toLowerCase() == "how are you ugc?" ||
+      message.content.toLowerCase() == "how are you ugc"
     ) {
       const rng2324514 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
       if (rng2324514 == 1) {
