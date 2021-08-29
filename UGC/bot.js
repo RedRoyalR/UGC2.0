@@ -1798,7 +1798,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           if (ms(time) > 2147483647) {
             const Timey = ms(time) / 2147483647;
             console.log(Timey);
-            for (let index = 0; index < Math.floor(Timey); index++) {
+            for (let test = 0; test < Math.floor(Timey); test++) {
               // setTimeout(async () => {}, 2147483647);
               sleep(2147483647);
             }
