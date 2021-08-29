@@ -1787,43 +1787,46 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           var embedSent = await message.channel.send(embed);
           embedSent.react("🎉");
 
-          setTimeout(async () => {
-            try {
-              const peopleReactedBot = await embedSent.reactions.cache
-                .get("🎉")
-                .users.fetch();
-              var peopleReacted = peopleReactedBot
-                .array()
-                .filter((u) => u.id !== client.user.id);
-            } catch (e) {
-              return message.channel.send(
-                `An unknown error happened during the draw of the giveaway **${item}** : ` +
-                  "`" +
-                  e +
-                  "`"
-              );
-            }
-            var winner;
+          setTimeout(
+            setTimeout(async () => {
+              try {
+                const peopleReactedBot = await embedSent.reactions.cache
+                  .get("🎉")
+                  .users.fetch();
+                var peopleReacted = peopleReactedBot
+                  .array()
+                  .filter((u) => u.id !== client.user.id);
+              } catch (e) {
+                return message.channel.send(
+                  `An unknown error happened during the draw of the giveaway **${item}** : ` +
+                    "`" +
+                    e +
+                    "`"
+                );
+              }
+              var winner;
 
-            if (peopleReacted.length <= 0) {
-              return message.channel.send(
-                `Not enough participants to execute the draw of the giveaway **${item}** :(`
-              );
-            } else {
-              var index = Math.floor(Math.random() * peopleReacted.length);
-              winner = peopleReacted[index];
-            }
-            if (!winner) {
-              message.channel.send(
-                `An unknown error happened during the draw of the giveaway **${item}**`
-              );
-            } else {
-              console.log(`Giveaway ${item} won by ${winner.toString()}`);
-              message.channel.send(
-                `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
-              );
-            }
-          }, ms(time));
+              if (peopleReacted.length <= 0) {
+                return message.channel.send(
+                  `Not enough participants to execute the draw of the giveaway **${item}** :(`
+                );
+              } else {
+                var index = Math.floor(Math.random() * peopleReacted.length);
+                winner = peopleReacted[index];
+              }
+              if (!winner) {
+                message.channel.send(
+                  `An unknown error happened during the draw of the giveaway **${item}**`
+                );
+              } else {
+                console.log(`Giveaway ${item} won by ${winner.toString()}`);
+                message.channel.send(
+                  `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
+                );
+              }
+            }, ms(time)),
+            ms(`3s`)
+          );
           return;
         }
       }
