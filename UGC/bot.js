@@ -1780,26 +1780,28 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           if (!item) {
             item = "No title";
           }
-          var embed = new MessageEmbed();
-          embed.setColor(0x3333ff);
-          embed.setTitle("New Giveaway !");
-          embed.setDescription("**" + item + "**");
-          embed.addField(
-            `Duration : `,
-            ms(ms(time), {
-              long: true,
-            }),
-            true
-          );
-          embed.setFooter("React to this message with 🎉 to participate !");
-          var embedSent = await message.channel.send(embed);
-          embedSent.react("🎉");
-          console.log(ms(time));
           if (ms(time) > 2147483647) {
             message.reply(
               "Fuck no, don't got attention span for THAT damn long you fucker."
             );
             return;
+          } else {
+            var embed = new MessageEmbed();
+            embed.setColor(0x3333ff);
+            embed.setTitle("New Giveaway !");
+            embed.setDescription("**" + item + "**");
+            embed.addField(
+              `Duration : `,
+              ms(ms(time), {
+                long: true,
+              }),
+              true
+            );
+            embed.setFooter("React to this message with 🎉 to participate !");
+            var embedSent = await message.channel.send(embed);
+            embedSent.react("🎉");
+            console.log(ms(time));
+
             // const Timey = ms(time) / 2147483647;
             // console.log(Timey);
             // setTimeout(async () => {
@@ -1845,7 +1847,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             //     );
             //   }
             // }, 0);
-          } else {
+
             setTimeout(async () => {
               try {
                 const peopleReactedBot = await embedSent.reactions.cache
