@@ -1786,7 +1786,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           embed.setFooter("React to this message with 🎉 to participate !");
           var embedSent = await message.channel.send(embed);
           embedSent.react("🎉");
-
+          console.log(ms(time))
           setTimeout(async () => {
 
               setTimeout(async () => {
