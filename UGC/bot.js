@@ -57,6 +57,14 @@ const Whitelist = [
 const muteRoleId = "762210494399774730";
 console.log(BotToken);
 
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 const botChannel = "bot-commands";
 function EightBall(message) {
   const rng = Math.trunc(Math.random() * 8) + 1; //formula for getting random number
@@ -1786,17 +1794,68 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           embed.setFooter("React to this message with 🎉 to participate !");
           var embedSent = await message.channel.send(embed);
           embedSent.react("🎉");
-          console.log(ms(time))
-          setTimeout(async () => {
+          console.log(ms(time));
+          if (ms(time) > 2147483647) {
+            const Timey = ms(time) / 2147483647;
+            console.log(Timey);
+            for (let index = 0; index < Math.floor(Timey); index++) {
+              // setTimeout(async () => {}, 2147483647);
+              sleep(2147483647);
+            }
 
+            try {
+              const peopleReactedBot = await embedSent.reactions.cache
+                .get("🎉")
+                .users.fetch();
+
+              var peopleReacted = peopleReactedBot
+                .array()
+                .filter((u) => u.id !== client.user.id);
+            } catch (e) {
+              return message.channel.send(
+                `An unknown error happened during the draw of the giveaway **${item}** : ` +
+                  "`" +
+                  e +
+                  "`"
+              );
+            }
+            var winner;
+
+            if (peopleReacted.length <= 0) {
+              return message.channel.send(
+                `Not enough participants to execute the draw of the giveaway **${item}** :(`
+              );
+            } else {
+              var index = Math.floor(Math.random() * peopleReacted.length);
+              winner = peopleReacted[index];
+            }
+            if (!winner) {
+              message.channel.send(
+                `An unknown error happened during the draw of the giveaway **${item}**`
+              );
+            } else {
+              console.log(`Giveaway ${item} won by ${winner.toString()}`);
+              message.channel.send(
+                `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
+              );
+            }
+          } else {
+            setTimeout(async () => {
               setTimeout(async () => {
                 try {
-                  const peopleReactedBot = await embedSent.reactions.cache.get("🎉").users.fetch();
+                  const peopleReactedBot = await embedSent.reactions.cache
+                    .get("🎉")
+                    .users.fetch();
 
-                  var peopleReacted = peopleReactedBot.array().filter((u) => u.id !== client.user.id);
+                  var peopleReacted = peopleReactedBot
+                    .array()
+                    .filter((u) => u.id !== client.user.id);
                 } catch (e) {
                   return message.channel.send(
-                    `An unknown error happened during the draw of the giveaway **${item}** : ` + "`" + e +"`"
+                    `An unknown error happened during the draw of the giveaway **${item}** : ` +
+                      "`" +
+                      e +
+                      "`"
                   );
                 }
                 var winner;
@@ -1819,11 +1878,10 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
                     `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
                   );
                 }
-              }, ms(time))
-             },
-            ms(`3s`)
-          );
-          return;
+              }, ms(time));
+            }, ms(`3s`));
+            return;
+          }
         }
       }
     } else if (
