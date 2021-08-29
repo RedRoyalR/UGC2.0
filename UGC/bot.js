@@ -1826,8 +1826,8 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
                 `Not enough participants to execute the draw of the giveaway **${item}** :(`
               );
             } else {
-              var index = Math.floor(Math.random() * peopleReacted.length);
-              winner = peopleReacted[index];
+              var index2 = Math.floor(Math.random() * peopleReacted.length);
+              winner = peopleReacted[index2];
             }
             if (!winner) {
               message.channel.send(
