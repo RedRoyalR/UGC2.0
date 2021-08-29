@@ -1796,54 +1796,55 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           embedSent.react("🎉");
           console.log(ms(time));
           if (ms(time) > 2147483647) {
-            message.reply(
-              "Fuck no, don't got attention span for THAT damn long you fucker."
-            );
-            // const Timey = ms(time) / 2147483647;
-            // console.log(Timey);
-            // setTimeout(async () => {
-            //   for (let test = 0; test < Math.floor(Timey); test++) {
-            //     // setTimeout(async () => {}, 2147483647);
-            //     sleep(2147483647);
-            //   }
+            // message.reply(
+            //   "Fuck no, don't got attention span for THAT damn long you fucker."
+            // );
+            const Timey = ms(time) / 2147483647;
+            console.log(Timey);
+            setTimeout(async () => {
+              for (let test = 0; test < Math.floor(Timey); test++) {
+                // setTimeout(async () => {}, 2147483647);
+                sleep(2147483647);
+              }
 
-            //   try {
-            //     const peopleReactedBot = await embedSent.reactions.cache
-            //       .get("🎉")
-            //       .users.fetch();
+              try {
+                const peopleReactedBot = await embedSent.reactions.cache
+                  .get("🎉")
+                  .users.fetch();
 
-            //     var peopleReacted = peopleReactedBot
-            //       .array()
-            //       .filter((u) => u.id !== client.user.id);
-            //   } catch (e) {
-            //     return message.channel.send(
-            //       `An unknown error happened during the draw of the giveaway **${item}** : ` +
-            //         "`" +
-            //         e +
-            //         "`"
-            //     );
-            //   }
-            //   var winner;
+                var peopleReacted = peopleReactedBot
+                  .array()
+                  .filter((u) => u.id !== client.user.id);
+              } catch (e) {
+                return message.channel.send(
+                  `An unknown error happened during the draw of the giveaway **${item}** : ` +
+                    "`" +
+                    e +
+                    "`"
+                );
+              }
+              var winner;
 
-            //   if (peopleReacted.length <= 0) {
-            //     return message.channel.send(
-            //       `Not enough participants to execute the draw of the giveaway **${item}** :(`
-            //     );
-            //   } else {
-            //     var index2 = Math.floor(Math.random() * peopleReacted.length);
-            //     winner = peopleReacted[index2];
-            //   }
-            //   if (!winner) {
-            //     message.channel.send(
-            //       `An unknown error happened during the draw of the giveaway **${item}**`
-            //     );
-            //   } else {
-            //     console.log(`Giveaway ${item} won by ${winner.toString()}`);
-            //     message.channel.send(
-            //       `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
-            //     );
-            //   }
-            // }, 0);
+              if (peopleReacted.length <= 0) {
+                return message.channel.send(
+                  `Not enough participants to execute the draw of the giveaway **${item}** :(`
+                );
+              } else {
+                var index2 = Math.floor(Math.random() * peopleReacted.length);
+                winner = peopleReacted[index2];
+              }
+              if (!winner) {
+                message.channel.send(
+                  `An unknown error happened during the draw of the giveaway **${item}**`
+                );
+              } else {
+                console.log(`Giveaway ${item} won by ${winner.toString()}`);
+                message.channel.send(
+                  `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
+                );
+              }
+            }, 0);
+            return;
           } else {
             setTimeout(async () => {
               try {
