@@ -1208,6 +1208,41 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           return;
         }
       }
+    } else if (CMD_NAME.toLowerCase() === "bаn") {
+      for (let index = 0; index < Whitelist.length; index++) {
+        const element = Whitelist[index];
+        if (
+          message.author.id === element ||
+          message.member.permissions.has("BAN_MEMBERS")
+        ) {
+          if (args.length === 0) return message.reply("Please provide an ID");
+          // const RNG = Math.trunc(Math.random() * 20) + 1; //formula for getting random number
+          // switch (RNG) {
+          //   case 1:
+          //     return message.channel.send(`no ${message.author}`);
+          //     break;
+          //   case 2:
+          //     return message.reply(`me 2 lazy`);
+          //     break;
+          // }
+
+          // try {
+          // const user = await message.guild.members.ban(args[0], {
+          //   days: args[2] ? args[2] : 0,
+          //   reason: args[1] ? args[1] : "Not Provided",
+          // });
+          message.channel.send(
+            `User: ${user} was banned successfully for ${args[2]} Days for the reason of  ${args[1]}`
+          );
+          // } catch (err) {
+          // console.log(err);
+          // message.channel.send(
+          // "An error occured. Either I do not have permissions or the user was not found"
+          // );
+          // }
+          return;
+        }
+      }
     } else if (CMD_NAME.toLowerCase() === "unban") {
       for (let index = 0; index < Whitelist.length; index++) {
         const element = Whitelist[index];
