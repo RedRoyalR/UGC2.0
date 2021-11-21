@@ -5,7 +5,7 @@ const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
 
 let cooldown = true;
-const versionValue = "51.01.06";
+const versionValue = "52.01.06";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
