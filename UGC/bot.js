@@ -3,7 +3,7 @@ require("dotenv").config();
 const commandUsed = new Set(); //to check for someone spamming it
 const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
-const cron = require(`node-cron`);
+
 let cooldown = true;
 const versionValue = "51.01.06";
 const desc = `
@@ -47,83 +47,6 @@ const desc = `
 2. $invite --It will send link to add UGC to your server
 3. $version --It will send UGC's version data
 `;
-
-const birthdays = new Map();
-birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
-birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
-birthdays.set("810790148660396032", { month: "Nov", day: 21 }); //Void
-
-birthdays.set("354579634395938817", { month: "Oct", day: 13 }); //Azord
-birthdays.set("398091045616746506", { month: "Feb", day: 4 }); //Washesh
-birthdays.set("398091045616746506", { month: "Feb", day: 14 }); //Raj
-
-birthdays.set("810790148660396032", { month: "Apr", day: 1 }); //UGC
-
-const setSchedules = () => {
-  // Fetch the general channel that you'll send the birthday message
-  const general = client.channels.cache.get("742992468588625941");
-
-  // For every birthday
-  birthdays.forEach((birthday, userId) => {
-    // Define the user object of the user Id
-    const user4 = client.users.cache.get(userId);
-
-    // Create a cron schedule
-    cron.schedule(`* * ${birthday.day} ${birthday.month} *`, () => {
-      const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
-      switch (rng8) {
-        case 1:
-          general.send(
-            `Happy Birthday ${user4.toString()}! Hope you die soon fucker.`
-          );
-          general.send(
-            `I fucking do not actually care if its your birthday or not.`
-          );
-          break;
-        case 2:
-          general.send(
-            `Dreadful Birthday to you ${user4.toString()} shithead!`
-          );
-          general.send(`That is all you get as a present.`);
-          break;
-        case 3:
-          general.send(
-            `Hope you have a shitty birthday ${user4.toString()} retard!`
-          );
-          general.send(
-            `Givve me your cake, then I could think of being a little nicer.`
-          );
-          break;
-        case 4:
-          general.send(
-            `Hope you have a shitty birthday ${user4.toString()} retard!`
-          );
-          general.send(
-            `Its your birthday, but I ain't gonna be nice to you for that.`
-          );
-          break;
-        case 5:
-          general.send(
-            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-          );
-
-          break;
-        case 6:
-          general.send(
-            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-          );
-
-          break;
-
-        default:
-          general.send(
-            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-          );
-          break;
-      }
-    });
-  });
-};
 
 const BotToken = process.env.DISCORDJS_JS_TOKEN;
 const Whitelist = [
@@ -388,9 +311,94 @@ const {
   Message,
 } = require("discord.js");
 const ms = require("ms");
+const cron = require("node-cron");
 const client = new Client({
   partials: ["MESSAGE", "REACTION"],
 });
+
+const birthdays = new Map();
+birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
+birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
+birthdays.set("810790148660396032", { month: "Nov", day: 16 }); //Void
+
+birthdays.set("810790148660396032", { month: "Nov", day: 22 }); //Void
+
+birthdays.set("533084050835898379", { month: "Oct", day: 13 }); //Azord
+birthdays.set("736581395085787206", { month: "Feb", day: 4 }); //Washesh
+birthdays.set("604261923684614155", { month: "Feb", day: 14 }); //Raj
+
+// birthdays.set("810790148660396032", { month: "Apr", day: 1 }); //UGC
+
+const setSchedules = () => {
+  // Fetch the general channel that you'll send the birthday message
+  const general = client.channels.cache.get("742992468588625941");
+
+  // For every birthday
+  birthdays.forEach((birthday, userId) => {
+    // Define the user object of the user Id
+    const user4 = client.users.cache.get(userId);
+
+    // Create a cron schedule
+    cron.schedule(
+      `* ${20} ${birthday.day} ${birthday.month} *`,
+      () => {
+        const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
+
+        switch (rng8) {
+          case 1:
+            general.send(
+              `Happy Birthday ${user4.toString()}! Hope you die soon fucker.`
+            );
+            general.send(
+              `I fucking do not actually care if its your birthday or not.`
+            );
+            break;
+          case 2:
+            general.send(
+              `Dreadful Birthday to you ${user4.toString()} shithead!`
+            );
+            general.send(`That is all you get as a present.`);
+            break;
+          case 3:
+            general.send(
+              `Hope you have a shitty birthday ${user4.toString()} retard!`
+            );
+            general.send(
+              `Givve me your cake, then I could think of being a little nicer.`
+            );
+            break;
+          case 4:
+            general.send(
+              `Hope you have a shitty birthday ${user4.toString()} retard!`
+            );
+            general.send(
+              `Its your birthday, but I ain't gonna be nice to you for that.`
+            );
+            break;
+          case 5:
+            general.send(
+              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+            );
+
+            break;
+          case 6:
+            general.send(
+              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+            );
+
+            break;
+
+          default:
+            general.send(
+              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+            );
+            break;
+        }
+      },
+      { scheduled: true, timezone: `Asia/Dhaka` }
+    );
+  });
+};
 
 const PREFIX = "$";
 let UGCm;
