@@ -3,8 +3,9 @@ require("dotenv").config();
 const commandUsed = new Set(); //to check for someone spamming it
 const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
+const cron = require(`node-cron`);
 let cooldown = true;
-const versionValue = "51.04.03";
+const versionValue = "51.01.06";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
@@ -46,6 +47,84 @@ const desc = `
 2. $invite --It will send link to add UGC to your server
 3. $version --It will send UGC's version data
 `;
+
+const birthdays = new Map();
+birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
+birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
+birthdays.set("810790148660396032", { month: "Nov", day: 21 }); //Void
+
+birthdays.set("354579634395938817", { month: "Oct", day: 13 }); //Azord
+birthdays.set("398091045616746506", { month: "Feb", day: 4 }); //Washesh
+birthdays.set("398091045616746506", { month: "Feb", day: 14 }); //Raj
+
+birthdays.set("810790148660396032", { month: "Apr", day: 1 }); //UGC
+
+const setSchedules = () => {
+  // Fetch the general channel that you'll send the birthday message
+  const general = client.channels.cache.get("742992468588625941");
+
+  // For every birthday
+  birthdays.forEach((birthday, userId) => {
+    // Define the user object of the user Id
+    const user4 = client.users.cache.get(userId);
+
+    // Create a cron schedule
+    cron.schedule(`* * ${birthday.day} ${birthday.month} *`, () => {
+      const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
+      switch (rng8) {
+        case 1:
+          general.send(
+            `Happy Birthday ${user4.toString()}! Hope you die soon fucker.`
+          );
+          general.send(
+            `I fucking do not actually care if its your birthday or not.`
+          );
+          break;
+        case 2:
+          general.send(
+            `Dreadful Birthday to you ${user4.toString()} shithead!`
+          );
+          general.send(`That is all you get as a present.`);
+          break;
+        case 3:
+          general.send(
+            `Hope you have a shitty birthday ${user4.toString()} retard!`
+          );
+          general.send(
+            `Givve me your cake, then I could think of being a little nicer.`
+          );
+          break;
+        case 4:
+          general.send(
+            `Hope you have a shitty birthday ${user4.toString()} retard!`
+          );
+          general.send(
+            `Its your birthday, but I ain't gonna be nice to you for that.`
+          );
+          break;
+        case 5:
+          general.send(
+            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+          );
+
+          break;
+        case 6:
+          general.send(
+            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+          );
+
+          break;
+
+        default:
+          general.send(
+            `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
+          );
+          break;
+      }
+    });
+  });
+};
+
 const BotToken = process.env.DISCORDJS_JS_TOKEN;
 const Whitelist = [
   "398091045616746506", //fade
@@ -56,14 +135,6 @@ const Whitelist = [
 ]; // TODO: TO ADD MORE PEOPLE TYPE THEIR ID INSIDE!
 const muteRoleId = "762210494399774730";
 console.log(BotToken);
-
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
 
 const botChannel = "bot-commands";
 function EightBall(message) {
@@ -325,6 +396,7 @@ const PREFIX = "$";
 let UGCm;
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
+  setSchedules();
   // client.user.setPresence({});
   // client.user
   //   .setActivity({
@@ -412,6 +484,8 @@ client.on("message", async (message) => {
     message.author.id == 155149108183695360
   )
     return;
+  if (condition) {
+  }
   if (message.guild === null) {
     if (message.content.startsWith(PREFIX)) {
       const [CMD_NAME, ...args] = message.content
@@ -1208,6 +1282,41 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           return;
         }
       }
+    } else if (CMD_NAME.toLowerCase() === "bаn") {
+      for (let index = 0; index < Whitelist.length; index++) {
+        const element = Whitelist[index];
+        if (
+          message.author.id === element ||
+          message.member.permissions.has("BAN_MEMBERS")
+        ) {
+          if (args.length === 0) return message.reply("Please provide an ID");
+          // const RNG = Math.trunc(Math.random() * 20) + 1; //formula for getting random number
+          // switch (RNG) {
+          //   case 1:
+          //     return message.channel.send(`no ${message.author}`);
+          //     break;
+          //   case 2:
+          //     return message.reply(`me 2 lazy`);
+          //     break;
+          // }
+
+          // try {
+          // const user = await message.guild.members.ban(args[0], {
+          //   days: args[2] ? args[2] : 0,
+          //   reason: args[1] ? args[1] : "Not Provided",
+          // });
+          message.channel.send(
+            `User: ${user} was banned successfully for ${args[2]} Days for the reason of  ${args[1]}`
+          );
+          // } catch (err) {
+          // console.log(err);
+          // message.channel.send(
+          // "An error occured. Either I do not have permissions or the user was not found"
+          // );
+          // }
+          return;
+        }
+      }
     } else if (CMD_NAME.toLowerCase() === "unban") {
       for (let index = 0; index < Whitelist.length; index++) {
         const element = Whitelist[index];
@@ -1759,7 +1868,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         }
       }
     } else if (CMD_NAME.toLowerCase() == "giveaway") {
-      // $giveaway {time s/m/d} {item}
+      // !giveaway {time s/m/d} {item}
       // const messageArray = message.content.split(" ");
       for (let index = 0; index < Whitelist.length; index++) {
         const element = Whitelist[index];
@@ -1780,80 +1889,26 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           if (!item) {
             item = "No title";
           }
-          if (ms(time) > 2147483647) {
-            message.reply(
-              "Fuck no, don't got attention span for THAT damn long you fucker."
-            );
-            return;
-          } else {
-            var embed = new MessageEmbed();
-            embed.setColor(0x3333ff);
-            embed.setTitle("New Giveaway !");
-            embed.setDescription("**" + item + "**");
-            embed.addField(
-              `Duration : `,
-              ms(ms(time), {
-                long: true,
-              }),
-              true
-            );
-            embed.setFooter("React to this message with 🎉 to participate !");
-            var embedSent = await message.channel.send(embed);
-            embedSent.react("🎉");
-            console.log(ms(time));
-
-            // const Timey = ms(time) / 2147483647;
-            // console.log(Timey);
-            // setTimeout(async () => {
-            //   for (let test = 0; test < Math.floor(Timey); test++) {
-            //     // setTimeout(async () => {}, 2147483647);
-            //     sleep(2147483647);
-            //   }
-
-            //   try {
-            //     const peopleReactedBot = await embedSent.reactions.cache
-            //       .get("🎉")
-            //       .users.fetch();
-
-            //     var peopleReacted = peopleReactedBot
-            //       .array()
-            //       .filter((u) => u.id !== client.user.id);
-            //   } catch (e) {
-            //     return message.channel.send(
-            //       `An unknown error happened during the draw of the giveaway **${item}** : ` +
-            //         "`" +
-            //         e +
-            //         "`"
-            //     );
-            //   }
-            //   var winner;
-
-            //   if (peopleReacted.length <= 0) {
-            //     return message.channel.send(
-            //       `Not enough participants to execute the draw of the giveaway **${item}** :(`
-            //     );
-            //   } else {
-            //     var index2 = Math.floor(Math.random() * peopleReacted.length);
-            //     winner = peopleReacted[index2];
-            //   }
-            //   if (!winner) {
-            //     message.channel.send(
-            //       `An unknown error happened during the draw of the giveaway **${item}**`
-            //     );
-            //   } else {
-            //     console.log(`Giveaway ${item} won by ${winner.toString()}`);
-            //     message.channel.send(
-            //       `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
-            //     );
-            //   }
-            // }, 0);
-
+          var embed = new MessageEmbed();
+          embed.setColor(0x3333ff);
+          embed.setTitle("New Giveaway !");
+          embed.setDescription("**" + item + "**");
+          embed.addField(
+            `Duration : `,
+            ms(ms(time), {
+              long: true,
+            }),
+            true
+          );
+          embed.setFooter("React to this message with 🎉 to participate !");
+          var embedSent = await message.channel.send(embed);
+          embedSent.react("🎉");
+          setTimeout(
             setTimeout(async () => {
               try {
                 const peopleReactedBot = await embedSent.reactions.cache
                   .get("🎉")
                   .users.fetch();
-
                 var peopleReacted = peopleReactedBot
                   .array()
                   .filter((u) => u.id !== client.user.id);
@@ -1885,10 +1940,10 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
                   `🎉 **${winner.toString()}** has won the giveaway **${item}** ! Congratulations ! 🎉`
                 );
               }
-            }, ms(time));
-
-            return;
-          }
+            }, ms(time)),
+            ms(`3s`)
+          );
+          return;
         }
       }
     } else if (
