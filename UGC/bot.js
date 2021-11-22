@@ -492,8 +492,6 @@ client.on("message", async (message) => {
     message.author.id == 155149108183695360
   )
     return;
-  if (condition) {
-  }
   if (message.guild === null) {
     if (message.content.startsWith(PREFIX)) {
       const [CMD_NAME, ...args] = message.content
