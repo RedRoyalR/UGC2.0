@@ -321,7 +321,7 @@ birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
 birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
 birthdays.set("810790148660396032", { month: "Nov", day: 16 }); //Void
 
-birthdays.set("810790148660396032", { month: "Nov", day: 22 }); //Void
+birthdays.set("810790148660396032", { month: "Nov", day: 25 }); //Void
 
 birthdays.set("533084050835898379", { month: "Oct", day: 13 }); //Azord
 birthdays.set("736581395085787206", { month: "Feb", day: 4 }); //Washesh
