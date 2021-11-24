@@ -340,7 +340,7 @@ const setSchedules = () => {
 
     // Create a cron schedule
     cron.schedule(
-      `* ${20} ${birthday.day} ${birthday.month} *`,
+      `* ${3} ${birthday.day} ${birthday.month} *`,
       () => {
         const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
 
