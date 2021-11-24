@@ -334,13 +334,13 @@ const setSchedules = () => {
   const general = client.channels.cache.get("742992468588625941");
 
   // For every birthday
-  birthdays.forEach((birthday, userId) => {
+  birthdays.forEach((userId, birthday) => {
     // Define the user object of the user Id
     const user4 = client.users.cache.get(userId);
 
     // Create a cron schedule
     cron.schedule(
-      `${20} ${0} ${birthday.day} ${birthday.month} *`,
+      `${30} * ${birthday.day} ${birthday.month} *`,
       () => {
         const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
 
