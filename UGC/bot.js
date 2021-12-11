@@ -5,7 +5,7 @@ const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
 
 let cooldown = true;
-const versionValue = "52.01.06";
+const versionValue = "52.12.03";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
@@ -302,11 +302,12 @@ function Insult3(message) {
 const {
   Client,
   MessageEmbed,
+  TextChannel,
   Emoji,
   Guild,
   GuildMember,
   GuildAuditLogs,
-  Channel,
+  // Channel,
   MessageManager,
   Message,
 } = require("discord.js");
@@ -321,7 +322,7 @@ birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
 birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
 birthdays.set("810790148660396032", { month: "Nov", day: 16 }); //Void
 
-birthdays.set("810790148660396032", { month: "Nov", day: 25 }); //Void
+birthdays.set("810790148660396032", { month: "Dec", day: 11 }); //Void
 
 birthdays.set("533084050835898379", { month: "Oct", day: 13 }); //Azord
 birthdays.set("736581395085787206", { month: "Feb", day: 4 }); //Washesh
@@ -329,73 +330,133 @@ birthdays.set("604261923684614155", { month: "Feb", day: 14 }); //Raj
 
 // birthdays.set("810790148660396032", { month: "Apr", day: 1 }); //UGC
 
-const setSchedules = () => {
+const setSchedules = (message) => {
   // Fetch the general channel that you'll send the birthday message
-  const general = client.channels.cache.get("742992468588625941");
-
+  // const general = client.channels.cache.get("742992468588625941");
+  // const general = client.channels.fetch("782493749573320706");
+  const mainchatg = client.channels.cache.find(
+    (ch) => ch.id === "742992468588625941"
+  );
+  // var channel2ae = msg.channel;
   // For every birthday
-  birthdays.forEach((userId, birthday) => {
+  birthdays.forEach((birthday, userId) => {
     // Define the user object of the user Id
     const user4 = client.users.cache.get(userId);
-
+    console.log("Testing 102");
+    console.log(`hmmmm ${birthday}`);
     // Create a cron schedule
     cron.schedule(
-      `${40} * ${birthday.day} ${birthday.month} *`,
+      `* ${6} ${birthday.day} ${birthday.month} *`,
       () => {
         const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
+        console.log("Testing 101");
+        console.log(rng8);
+        const channel = mainchatg;
 
+        console.log(channel);
+        console.log(channel.type);
         switch (rng8) {
           case 1:
-            general.send(
-              `Happy Birthday ${user4.toString()}! Hope you die soon fucker.`
-            );
-            general.send(
-              `I fucking do not actually care if its your birthday or not.`
-            );
+            {
+              console.log("Testing 103");
+              channel
+                .send(`Happy Birthday ${user4}! Hope you die soon fucker.`)
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+              channel.send(
+                `I fucking do not actually care if its your birthday or not.`
+              );
+            }
             break;
           case 2:
-            general.send(
-              `Dreadful Birthday to you ${user4.toString()} shithead!`
-            );
-            general.send(`That is all you get as a present.`);
+            {
+              console.log("Testing 103");
+              channel
+
+                .send(`Dreadful Birthday to you ${user4} shithead!`)
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+              channel
+                .get("742992468588625941")
+                .send(`That is all you get as a present.`);
+            }
             break;
           case 3:
-            general.send(
-              `Hope you have a shitty birthday ${user4.toString()} retard!`
-            );
-            general.send(
-              `Givve me your cake, then I could think of being a little nicer.`
-            );
+            {
+              console.log("Testing 103");
+
+              channel
+                .send(`Hope you have a shitty birthday ${user4} retard!`)
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch(console.error);
+              channel.send(
+                `Givve me your cake, then I could think of being a little nicer.`
+              );
+            }
             break;
           case 4:
-            general.send(
-              `Hope you have a shitty birthday ${user4.toString()} retard!`
-            );
-            general.send(
-              `Its your birthday, but I ain't gonna be nice to you for that.`
-            );
+            {
+              console.log("Testing 103");
+              channel
+                .send(`Hope you have a shitty birthday ${user4}} retard!`)
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+              channel.send(
+                `Its your birthday, but I ain't gonna be nice to you for that.`
+              );
+            }
             break;
           case 5:
-            general.send(
-              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-            );
-
+            {
+              console.log("Testing 103");
+              channel
+                .send(
+                  `Look I get it its your birthday ${user4}, but you can't fucking expect me to treat you better.`
+                )
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+            }
             break;
           case 6:
-            general.send(
-              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-            );
-
+            {
+              console.log("Testing 103");
+              channel
+                .send(
+                  `Look I get it its your birthday ${user4}, but you can't fucking expect me to treat you better.`
+                )
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+            }
             break;
 
           default:
-            general.send(
-              `Look I get it its your birthday ${user4.toString()}, but you can't fucking expect me to treat you better.`
-            );
+            {
+              console.log("Testing 103");
+              channel
+                .send(
+                  `Look I get it its your birthday ${user4}, but you can't fucking expect me to treat you better.`
+                )
+                .then((message) =>
+                  console.log(`Sent message: ${message.content}`)
+                )
+                .catch((err) => console.log(err));
+            }
             break;
         }
       },
-      { scheduled: true, timezone: `Asia/Dhaka` }
+      { timezone: `Asia/Dhaka` }
     );
   });
 };
@@ -405,6 +466,7 @@ let UGCm;
 client.on("ready", () => {
   console.log(`${client.user.tag} has logged in.`);
   setSchedules();
+
   // client.user.setPresence({});
   // client.user
   //   .setActivity({
@@ -919,6 +981,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           }
           message.channel.send(total);
         }
+      } else if (
+        CMD_NAME.toLowerCase() === "initilize" ||
+        CMD_NAME.toLowerCase() === "begin"
+      ) {
+        console.log("Test 214215213");
+        setSchedules(message);
       } else if (
         CMD_NAME.toLowerCase() === "sub" ||
         CMD_NAME.toLowerCase() === "subtract"
