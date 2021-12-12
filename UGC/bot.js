@@ -490,10 +490,24 @@ client.on("ready", () => {
   //   })
   //   .then(console.log("IT WORKS!"))
   //   .catch((err) => console.log(err));
+
   client.user
-    .setStatus("dnd", "Ho ho fuck you! Your in the naughty list fucker.")
+    .setPresence({
+      activity: {
+        status: "dnd",
+        name: `Ho Ho fuck you! Your in the naughty list fucker.`,
+
+        // name: `ROBLOX`,
+        type: 0,
+      },
+    })
     .then(console.log("IT WORKS!"))
     .catch((err) => console.log(err));
+
+  // client.user
+  //   .setStatus("dnd", "Ho Ho fuck you! Your in the naughty list fucker.")
+  //   .then(console.log("IT WORKS!"))
+  //   .catch((err) => console.log(err));
   UGCm = client.user;
 });
 
