@@ -477,18 +477,23 @@ client.on("ready", () => {
   //     // },
   //   })
   //   .catch((err) => console.log(err));
-  client.user
-    .setPresence({
-      activity: {
-        status: "Do Not Disturb",
-        name: `$help in for Interactions | by Rederuption™`,
 
-        // name: `ROBLOX`,
-        type: 0,
-      },
-    })
-    .then(console.log("IT WORKS!"))
-    .catch((err) => console.log(err));
+  // client.user
+  //   .setPresence({
+  //     activity: {
+  //       status: "Do Not Disturb",
+  //       name: `$help in for Interactions | by Rederuption™`,
+
+  //       // name: `ROBLOX`,
+  //       type: 0,
+  //     },
+  //   })
+  //   .then(console.log("IT WORKS!"))
+  //   .catch((err) => console.log(err));
+  client.user.setStatus(
+    "dnd",
+    "Ho ho fuck you! Your in the naughty list fucker."
+  );
   UGCm = client.user;
 });
 
