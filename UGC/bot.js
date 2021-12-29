@@ -692,17 +692,15 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       ) {
         message.channel.send(Math.cbrt(args[0]));
       } else if (CMD_NAME.toLowerCase() === "ping") {
-        const reactionEmoji = client.guilds.cache
-          .find((server) => server.name === "UGC")
-          .emojis.cache.find((emoji) => emoji.name === "Thonk");
+        const reactionEmoji = client.emojis.cache.get("775583383405068348");
         // message.react(reactionEmoji);
         message.channel
-          .send(`pong ${reactionEmoji}`)
+          .send(`pong <:Thonk:775583383405068348>`)
           .then((sentMessage) =>
             sentMessage.edit(
               `pong **_${
                 Date.now() - sentMessage.createdTimestamp
-              }_** ms ${reactionEmoji}`
+              }_** ms <:Thonk:775583383405068348>`
             )
           );
       } else {
