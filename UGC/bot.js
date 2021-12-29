@@ -632,6 +632,14 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         }
         message.channel.send(total);
       } else if (
+        CMD_NAME.toLowerCase() === "rng" ||
+        CMD_NAME.toLowerCase() === "random number"
+      ) {
+        if (message.channel.name === botChannel) {
+          const total = Math.trunc(Math.random() * args[0]) + 1; //formula for getting random number
+          message.channel.send(total);
+        }
+      } else if (
         CMD_NAME.toLowerCase() === "sub" ||
         CMD_NAME.toLowerCase() === "subtract"
       ) {
@@ -1007,6 +1015,14 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             const element = Number(args[index]);
             total += element;
           }
+          message.channel.send(total);
+        }
+      } else if (
+        CMD_NAME.toLowerCase() === "rng" ||
+        CMD_NAME.toLowerCase() === "random number"
+      ) {
+        if (message.channel.name === botChannel) {
+          const total = Math.trunc(Math.random() * args[0]) + 1; //formula for getting random number
           message.channel.send(total);
         }
       } else if (
