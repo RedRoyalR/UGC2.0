@@ -693,7 +693,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         message.channel.send(Math.cbrt(args[0]));
       } else if (CMD_NAME.toLowerCase() === "ping") {
         const reactionEmoji = client.emojis.cache.find(
-          (emoji) => emoji.name === "ayy"
+          (emoji) => emoji.name === "Thonk"
         );
         // message.react(reactionEmoji);
         message.channel
