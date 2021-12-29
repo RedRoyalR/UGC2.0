@@ -692,8 +692,9 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       ) {
         message.channel.send(Math.cbrt(args[0]));
       } else if (CMD_NAME.toLowerCase() === "ping") {
-        const reactionEmoji = client.emojis.cache.get("775583383405068348");
-
+        const reactionEmoji = client.guilds.cache
+          .find((server) => server.name === "UGC")
+          .emojis.cache.find((emoji) => emoji.name === "Thonk");
         // message.react(reactionEmoji);
         message.channel
           .send(`pong ${reactionEmoji}`)
