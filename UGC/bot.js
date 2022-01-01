@@ -339,14 +339,18 @@ const setSchedules = (message) => {
   );
   // var channel2ae = msg.channel;
   // For every birthday
-  cron.schedule(`* ${6} ${1} ${1} *`, () => {
-    channel
-      .send(
-        `@everyone You know what time it is, Happy fuckin New Year of regrets you fuckers.`
-      )
-      .then((message) => console.log(`Sent message: ${message.content}`))
-      .catch((err) => console.log(err));
-  });
+  cron.schedule(
+    `* ${5} ${2} ${1} *`,
+    () => {
+      channel
+        .send(
+          `@everyone You know what time it is, Happy fuckin New Year of regrets you fuckers.`
+        )
+        .then((message) => console.log(`Sent message: ${message.content}`))
+        .catch((err) => console.log(err));
+    },
+    { timezone: `Asia/Dhaka` }
+  );
 
   birthdays.forEach((birthday, userId) => {
     // Define the user object of the user Id
