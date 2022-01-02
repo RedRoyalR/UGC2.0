@@ -340,7 +340,7 @@ const setSchedules = (message) => {
   // var channel2ae = msg.channel;
   // For every birthday
   cron.schedule(
-    `${17} ${7} ${2} ${1} *`,
+    `${20} ${7} ${2} ${1} *`,
     () => {
       console.log("Initilized!");
       channel
