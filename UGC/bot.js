@@ -340,8 +340,9 @@ const setSchedules = (message) => {
   // var channel2ae = msg.channel;
   // For every birthday
   cron.schedule(
-    `${15} ${7} ${2} ${1} *`,
+    `${17} ${7} ${2} ${1} *`,
     () => {
+      console.log("Initilized!");
       channel
         .send(
           `@everyone You know what time it is, Happy fuckin New Year of regrets you fuckers.`
