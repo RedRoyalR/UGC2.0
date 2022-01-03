@@ -345,7 +345,7 @@ const setSchedules = (message) => {
       `* * * ${1} *`,
       () => {
         console.log("Initilized!");
-        channel
+        mainchatg
           .send(
             `@everyone You know what time it is, Happy fuckin New Year of regrets you fuckers.`
           )
@@ -355,7 +355,7 @@ const setSchedules = (message) => {
       { timezone: `Asia/Dhaka` }
     );
   } catch (error) {
-    common.error("Error trying to send: ", error);
+    console.log("Error trying to send: ", error);
   }
 
   birthdays.forEach((birthday, userId) => {
