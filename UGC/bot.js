@@ -339,8 +339,9 @@ const setSchedules = (message) => {
   );
   // var channel2ae = msg.channel;
   // For every birthday
+
   try {
-    await cron.schedule(
+    cron.schedule(
       `* * * ${1} *`,
       () => {
         console.log("Initilized!");
