@@ -339,8 +339,9 @@ const setSchedules = (message) => {
   );
   // var channel2ae = msg.channel;
   // For every birthday
+
   cron.schedule(
-    `${20} ${7} ${2} ${1} *`,
+    `* * * ${1} *`,
     () => {
       console.log("Initilized!");
       channel
@@ -352,10 +353,10 @@ const setSchedules = (message) => {
     },
     { timezone: `Asia/Dhaka` }
   );
-
   birthdays.forEach((birthday, userId) => {
     // Define the user object of the user Id
-    const user4 = client.users.cache.get(userId);
+
+    let user4 = client.users.cache.get(userId);
     console.log("Testing 102");
     console.log(`hmmmm ${birthday}`);
     // Create a cron schedule
