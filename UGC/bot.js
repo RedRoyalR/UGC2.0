@@ -342,7 +342,7 @@ const setSchedules = (message) => {
 
   try {
     cron.schedule(
-      `* * * ${1} *`,
+      `*  * ${1} ${1} *`,
       () => {
         console.log("Initilized!");
         mainchatg
