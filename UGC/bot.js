@@ -532,7 +532,7 @@ client.on("ready", () => {
     .setPresence({
       activity: {
         status: "Do Not Disturb",
-        name: `Ho Ho fuck you! Your in the naughty list fucker.`,
+        name: `$help in for Interactions | by Rederuption™`,
 
         // name: `ROBLOX`,
         type: 0,
