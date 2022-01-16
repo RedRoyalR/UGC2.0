@@ -386,7 +386,7 @@ const setSchedules = (message) => {
     console.log(`hmmmm ${birthday}`);
     // Create a cron schedule
     cron.schedule(
-      `* ${6} ${birthday.day} ${birthday.month} *`,
+      `* ${2} ${birthday.day} ${birthday.month} *`,
       () => {
         const rng8 = Math.trunc(Math.random() * 7) + 1; //formula for getting random number
         console.log("Testing 101");
