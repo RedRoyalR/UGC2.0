@@ -1630,7 +1630,12 @@ Time: *${value3}*`);
         // console.log(data);
         // debugger;
         // await browser.close();n
-      })();
+      })().catch((err) => {
+        message.reply(
+          "Oh why the fuck can't you check it yourself fucker, I sure can't access it."
+        );
+        console.log(err);
+      });
     } else if (CMD_NAME.toLowerCase() === "pinms") {
       for (let index = 0; index < Whitelist.length; index++) {
         const element = Whitelist[index];
