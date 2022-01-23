@@ -1594,6 +1594,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
 
 Content: ${value2}
 Time: *${value3}*`);
+        await browser.close;
         // console.log(value);
 
         /* Run javascript inside of the page */
