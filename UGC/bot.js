@@ -1592,9 +1592,11 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         let element3 = await page.$("#create_date");
         let value3 = await page.evaluate((el) => el.textContent, element3);
         // hook.send(value, value2);
-        message.reply(`**Title: ${value}**
+        message.reply(`
+**Title: ${value}**
 
-Content: ${value2}
+    Content: ${value2}
+    
 Time: *${value3}*`);
         await browser.close;
         // console.log(value);
