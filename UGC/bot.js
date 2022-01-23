@@ -1557,7 +1557,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       (async () => {
         /* Initiate the Puppeteer browser */
         const browser = await puppeteer.launch({
-          args: ["--no-sandbox"], //, "--disable-setuid-sandbox"
+          args: ["--no-sandbox", "--incognito"], //, "--disable-setuid-sandbox"
         });
         const page = await browser.newPage();
         /* Go to the IMDB Movie page and wait for it to load */
@@ -1603,13 +1603,20 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         await page.waitForSelector("#create_date");
         let element3 = await page.$("#create_date");
         let value3 = await page.evaluate((el) => el.textContent, element3);
-        // hook.send(value, value2);
-        message.reply(`
-**Title: ${value}**
 
-    Content: ${value2}
-    
-Time: *${value3}*`);
+        const embed = new MessageEmbed()
+          .setTitle(`**Title: ${value}**`)
+          .setDescription(`Content: ${value2}`) //
+          .setColor("664791")
+          .setFooter(`Time: ${value3}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
+        message.reply(embed);
+        // hook.send(value, value2);
+        //         message.reply(`
+        // **Title: ${value}**
+
+        //     Content: ${value2}
+
+        // Time: *${value3}*`);
         await browser.close;
         // console.log(value);
 
