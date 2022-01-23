@@ -4,6 +4,10 @@ const commandUsed = new Set(); //to check for someone spamming it
 const commandUsed2 = new Set(); // to check for someone really spamming it
 const commandUsed3 = new Set(); //to stop the bot from spamming with them
 const puppeteer = require("puppeteer");
+const KFUsername = "323-101313";
+const KFPassword = "Tiham01";
+const NGLUsername = "323-101900";
+const NGLPassword = "123456";
 const CS_URL = `https://sems.classtune.com/reminder`;
 let cooldown = true;
 const versionValue = "57.35.12";
@@ -1557,10 +1561,18 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         });
         const page = await browser.newPage();
         /* Go to the IMDB Movie page and wait for it to load */
+        let username = NGLUsername;
+        let password = NGLPassword;
+        if (args.length > 1) {
+          if (args[0] == "KF") {
+            username = KFUsername;
+            password = KFPassword;
+          }
+        }
         await page.goto(CS_URL);
         await page.waitForSelector(`#user_username`);
-        await page.type("#user_username", "323-101900");
-        await page.type("#user_password", "123456");
+        await page.type("#user_username", username);
+        await page.type("#user_password", password);
         await page.click(".btn-tune.btn-login");
         await page.waitForSelector(".tr-read-odd ");
         await page.click(".tr-read-odd a");
