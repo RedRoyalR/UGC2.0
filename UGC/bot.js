@@ -6,7 +6,7 @@ const commandUsed3 = new Set(); //to stop the bot from spamming with them
 const puppeteer = require("puppeteer");
 const CS_URL = `https://sems.classtune.com/reminder`;
 let cooldown = true;
-const versionValue = "52.12.03";
+const versionValue = "57.35.12";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
