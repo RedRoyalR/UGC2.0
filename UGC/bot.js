@@ -1569,18 +1569,34 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             password = KFPassword;
           }
         }
-        await page.goto("https://sems.classtune.com/");
+        // if (args.length >= 2) {
+        //   if (args[1] == Number) {
+
+        //   }
+        // }
+        await page.goto("https://sems.classtune.com");
         await page.waitForSelector(`#user_username`);
         await page.type("#user_username", username);
         await page.type("#user_password", password);
         await page.click(".btn-tune.btn-login");
         await page.goto(CS_URL);
-        await page.waitForSelector(".tr-read-odd ");
-        await page.click(".tr-read-odd a");
+        await page.waitForSelector(".tr-odd");
+        await page.click(".tr-odd a");
 
         await page.waitForSelector("#reminder-message a");
         await page.click("#reminder-message a");
 
+        await page.waitForSelector("#news_title");
+        let element = await page.$("#news_title");
+        let value = await page.evaluate((el) => el.textContent, element);
+
+        await page.waitForSelector("#news_content");
+        let element2 = await page.$("#news_content");
+        let value2 = await page.evaluate((el) => el.textContent, element2);
+        await page.waitForSelector("#create_date");
+        let element3 = await page.$("#create_date");
+        let value3 = await page.evaluate((el) => el.textContent, element3);
+        console.log(value, value2, value3);
         // const data = await page.evaluate(() => {
         //   // const title = document.querySelector("#news_title").innerHTML;
         //   // const content = document.querySelector("#news_content").innerHTML;
@@ -1593,18 +1609,6 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         //   return title;
         // });
         // console.log(data);
-
-        await page.waitForSelector("#news_title");
-        let element = await page.$("#news_title");
-        let value = await page.evaluate((el) => el.textContent, element);
-
-        await page.waitForSelector("#news_content");
-        let element2 = await page.$("#news_content");
-        let value2 = await page.evaluate((el) => el.textContent, element2);
-        await page.waitForSelector("#create_date");
-        let element3 = await page.$("#create_date");
-        let value3 = await page.evaluate((el) => el.textContent, element3);
-
         const embed = new MessageEmbed()
           .setTitle(`**Title: ${value}**`)
           .setDescription(`Content: ${value2}`) //
