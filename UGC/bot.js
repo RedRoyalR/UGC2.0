@@ -1567,6 +1567,23 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           if (args[0] == "KF") {
             username = KFUsername;
             password = KFPassword;
+            await page.goto("https://sems.classtune.com");
+            await page.waitForSelector(`#user_username`);
+            await page.type("#user_username", username);
+            await page.type("#user_password", password);
+            await page.click(".btn-tune.btn-login");
+            await page.goto(CS_URL);
+            await page.waitForSelector(".tr-odd");
+            await page.click(".tr-odd a");
+          } else {
+            await page.goto("https://sems.classtune.com");
+            await page.waitForSelector(`#user_username`);
+            await page.type("#user_username", username);
+            await page.type("#user_password", password);
+            await page.click(".btn-tune.btn-login");
+            await page.goto(CS_URL);
+            await page.waitForSelector(".tr-read-odd");
+            await page.click(".tr-read-odd a");
           }
         }
         // if (args.length >= 2) {
@@ -1574,14 +1591,6 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
 
         //   }
         // }
-        await page.goto("https://sems.classtune.com");
-        await page.waitForSelector(`#user_username`);
-        await page.type("#user_username", username);
-        await page.type("#user_password", password);
-        await page.click(".btn-tune.btn-login");
-        await page.goto(CS_URL);
-        await page.waitForSelector(".tr-odd");
-        await page.click(".tr-odd a");
 
         await page.waitForSelector("#reminder-message a");
         await page.click("#reminder-message a");
