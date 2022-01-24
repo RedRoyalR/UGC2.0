@@ -1569,11 +1569,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             password = KFPassword;
           }
         }
-        await page.goto(CS_URL);
+        await page.goto("https://sems.classtune.com/");
         await page.waitForSelector(`#user_username`);
         await page.type("#user_username", username);
         await page.type("#user_password", password);
         await page.click(".btn-tune.btn-login");
+        await page.goto(CS_URL);
         await page.waitForSelector(".tr-read-odd ");
         await page.click(".tr-read-odd a");
 
