@@ -1577,9 +1577,10 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             if (await page.waitForSelector(".tr-odd")) {
               await page.click(".tr-odd a");
             } else {
-              await page.click(".tr-read a");
+              await page.click(".tr-read-odd a");
             }
-
+            await page.waitForSelector("#reminder-message a");
+            await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
 
             await page.waitForSelector("#news_title");
@@ -1631,8 +1632,10 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             if (await page.waitForSelector(".tr-odd")) {
               await page.click(".tr-odd a");
             } else {
-              await page.click(".tr-read a");
+              await page.click(".tr-read-odd a");
             }
+            await page.waitForSelector("#reminder-message a");
+            await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
 
             await page.waitForSelector("#news_title");
