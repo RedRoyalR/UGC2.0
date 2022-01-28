@@ -1573,12 +1573,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.type("#user_password", password);
             await page.click(".btn-tune.btn-login");
             await page.goto(CS_URL);
-            (await page.waitForSelector(".tr-read-odd")) ||
-              (await page.waitForSelector(".tr-odd"));
+            // (await page.waitForSelector(".tr-read-odd")) ||
+            await page.waitForSelector(".tr-odd");
             (await page.click(".tr-odd a")) ||
-              (await page.click(".tr-read-odd a"));
+              // (await page.click(".tr-read-odd a"));
 
-            await page.waitForSelector("#news_title");
+              (await page.waitForSelector("#news_title"));
             let element = await page.$("#news_title");
             let value = await page.evaluate((el) => el.textContent, element);
 
@@ -1624,12 +1624,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           await page.type("#user_password", password);
           await page.click(".btn-tune.btn-login");
           await page.goto(CS_URL);
-          (await page.waitForSelector(".tr-read-odd")) ||
-            (await page.waitForSelector(".tr-odd"));
+          // (await page.waitForSelector(".tr-read-odd")) ||
+          await page.waitForSelector(".tr-odd");
           (await page.click(".tr-odd a")) ||
-            (await page.click(".tr-read-odd a"));
+            // (await page.click(".tr-read-odd a"));
 
-          await page.waitForSelector("#news_title");
+            (await page.waitForSelector("#news_title"));
           let element = await page.$("#news_title");
           let value = await page.evaluate((el) => el.textContent, element);
 
