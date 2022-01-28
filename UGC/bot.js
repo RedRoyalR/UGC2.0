@@ -1573,132 +1573,130 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.type("#user_password", password);
             await page.click(".btn-tune.btn-login");
             await page.goto(CS_URL);
-            await page.waitForSelector(".tr-read-odd") ||
-              await page.waitForSelector(".tr-odd");
-            await page.click(".tr-odd") ||
-              await page.click(".tr-read-odd a");
-
-              await page.waitForSelector("#news_title");
-              let element = await page.$("#news_title");
-              let value = await page.evaluate((el) => el.textContent, element);
-      
-              await page.waitForSelector("#news_content");
-              let element2 = await page.$("#news_content");
-              let value2 = await page.evaluate((el) => el.textContent, element2);
-              await page.waitForSelector("#create_date");
-              let element3 = await page.$("#create_date");
-              let value3 = await page.evaluate((el) => el.textContent, element3);
-              console.log(value, value2, value3);
-              // const data = await page.evaluate(() => {
-              //   // const title = document.querySelector("#news_title").innerHTML;
-              //   // const content = document.querySelector("#news_content").innerHTML;
-              //   // page.waitForSelector("#news_title");n
-              //   let node1 = document.getElementById("news_title");
-              //   let node2 = document.getElementById("news_content");
-      
-              //   const title = node1.innerText;
-              //   const content = node2.innerText;
-              //   return title;
-              // });
-              // console.log(data);
-              const embed = new MessageEmbed()
-                .setTitle(`**Title: ${value}**`)
-                .setDescription(`Content: ${value2}`) //
-                .setColor("664791")
-                .setFooter(`Time: ${value3}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
-              message.reply(embed);
-              // hook.send(value, value2);
-              //         message.reply(`
-              // **Title: ${value}**
-      
-              //     Content: ${value2}
-      
-              // Time: *${value3}*`);
-              await browser.close;
-          }
-          } else {
-            await page.goto("https://sems.classtune.com");
-            await page.waitForSelector(`#user_username`);
-            await page.type("#user_username", username);
-            await page.type("#user_password", password);
-            await page.click(".btn-tune.btn-login");
-            await page.goto(CS_URL);
             (await page.waitForSelector(".tr-read-odd")) ||
-              await page.waitForSelector(".tr-odd");
-            (await page.click(".tr-odd") ||
-              await page.click(".tr-read-odd a"))
+              (await page.waitForSelector(".tr-odd"));
+            (await page.click(".tr-odd")) ||
+              (await page.click(".tr-read-odd a"));
 
-              await page.waitForSelector("#news_title");
-              let element = await page.$("#news_title");
-              let value = await page.evaluate((el) => el.textContent, element);
-      
-              await page.waitForSelector("#news_content");
-              let element2 = await page.$("#news_content");
-              let value2 = await page.evaluate((el) => el.textContent, element2);
-              await page.waitForSelector("#create_date");
-              let element3 = await page.$("#create_date");
-              let value3 = await page.evaluate((el) => el.textContent, element3);
-              console.log(value, value2, value3);
-              // const data = await page.evaluate(() => {
-              //   // const title = document.querySelector("#news_title").innerHTML;
-              //   // const content = document.querySelector("#news_content").innerHTML;
-              //   // page.waitForSelector("#news_title");n
-              //   let node1 = document.getElementById("news_title");
-              //   let node2 = document.getElementById("news_content");
-      
-              //   const title = node1.innerText;
-              //   const content = node2.innerText;
-              //   return title;
-              // });
-              // console.log(data);
-              const embed = new MessageEmbed()
-                .setTitle(`**Title: ${value}**`)
-                .setDescription(`Content: ${value2}`) //
-                .setColor("664791")
-                .setFooter(`Time: ${value3}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
-              message.reply(embed);
-              // hook.send(value, value2);
-              //         message.reply(`
-              // **Title: ${value}**
-      
-              //     Content: ${value2}
-      
-              // Time: *${value3}*`);
-              await browser.close;
+            await page.waitForSelector("#news_title");
+            let element = await page.$("#news_title");
+            let value = await page.evaluate((el) => el.textContent, element);
+
+            await page.waitForSelector("#news_content");
+            let element2 = await page.$("#news_content");
+            let value2 = await page.evaluate((el) => el.textContent, element2);
+            await page.waitForSelector("#create_date");
+            let element3 = await page.$("#create_date");
+            let value3 = await page.evaluate((el) => el.textContent, element3);
+            console.log(value, value2, value3);
+            // const data = await page.evaluate(() => {
+            //   // const title = document.querySelector("#news_title").innerHTML;
+            //   // const content = document.querySelector("#news_content").innerHTML;
+            //   // page.waitForSelector("#news_title");n
+            //   let node1 = document.getElementById("news_title");
+            //   let node2 = document.getElementById("news_content");
+
+            //   const title = node1.innerText;
+            //   const content = node2.innerText;
+            //   return title;
+            // });
+            // console.log(data);
+            const embed = new MessageEmbed()
+              .setTitle(`**Title: ${value}**`)
+              .setDescription(`Content: ${value2}`) //
+              .setColor("664791")
+              .setFooter(`Time: ${value3}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
+            message.reply(embed);
+
+            // hook.send(value, value2);
+            //         message.reply(`
+            // **Title: ${value}**
+
+            //     Content: ${value2}
+
+            // Time: *${value3}*`);
+            await browser.close;
           }
+        } else {
+          await page.goto("https://sems.classtune.com");
+          await page.waitForSelector(`#user_username`);
+          await page.type("#user_username", username);
+          await page.type("#user_password", password);
+          await page.click(".btn-tune.btn-login");
+          await page.goto(CS_URL);
+          (await page.waitForSelector(".tr-read-odd")) ||
+            (await page.waitForSelector(".tr-odd"));
+          (await page.click(".tr-odd")) || (await page.click(".tr-read-odd a"));
+
+          await page.waitForSelector("#news_title");
+          let element = await page.$("#news_title");
+          let value = await page.evaluate((el) => el.textContent, element);
+
+          await page.waitForSelector("#news_content");
+          let element2 = await page.$("#news_content");
+          let value2 = await page.evaluate((el) => el.textContent, element2);
+          await page.waitForSelector("#create_date");
+          let element3 = await page.$("#create_date");
+          let value3 = await page.evaluate((el) => el.textContent, element3);
+          console.log(value, value2, value3);
+          // const data = await page.evaluate(() => {
+          //   // const title = document.querySelector("#news_title").innerHTML;
+          //   // const content = document.querySelector("#news_content").innerHTML;
+          //   // page.waitForSelector("#news_title");n
+          //   let node1 = document.getElementById("news_title");
+          //   let node2 = document.getElementById("news_content");
+
+          //   const title = node1.innerText;
+          //   const content = node2.innerText;
+          //   return title;
+          // });
+          // console.log(data);
+          const embed = new MessageEmbed()
+            .setTitle(`**Title: ${value}**`)
+            .setDescription(`Content: ${value2}`) //
+            .setColor("664791")
+            .setFooter(`Time: ${value3}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
+          message.reply(embed);
+          // hook.send(value, value2);
+          //         message.reply(`
+          // **Title: ${value}**
+
+          //     Content: ${value2}
+
+          // Time: *${value3}*`);
+          await browser.close;
         }
-        // if (args.length >= 2) {
-        //   if (args[1] == Number) {
-
-        //   }
-        // }
-
-        
-        // console.log(value);
-
-        /* Run javascript inside of the page */
-
-        // let data = await page.evaluate(() => {
-        //   let link = document.getElementsByTagName("a")[32].getAttribute("href");
-
-        //   page.click(link);
-
-        //   /* Returning an object filled with the scraped data */
-        //   return {
-        //     link,
-        //   };
-        // });
-
-        /* Outputting what we scraped */
-        // console.log(data);
-        // debugger;
-        // await browser.close();n
       })().catch((err) => {
         message.reply(
           "Oh why the fuck can't you check it yourself fucker, I sure can't access it."
         );
         console.log(err);
       });
+      // if (args.length >= 2) {
+      //   if (args[1] == Number) {
+
+      //   }
+      // }
+
+      // console.log(value);
+
+      /* Run javascript inside of the page */
+
+      // let data = await page.evaluate(() => {
+      //   let link = document.getElementsByTagName("a")[32].getAttribute("href");
+
+      //   page.click(link);
+
+      //   /* Returning an object filled with the scraped data */
+      //   return {
+      //     link,
+      //   };
+      // });
+
+      /* Outputting what we scraped */
+      // console.log(data);
+      // debugger;
+      // await browser.close();n
     } else if (CMD_NAME.toLowerCase() === "pinms") {
       for (let index = 0; index < Whitelist.length; index++) {
         const element = Whitelist[index];
