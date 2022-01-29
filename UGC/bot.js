@@ -1578,6 +1578,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             if ((await page.$(`.tr-odd`)) !== null) {
               await page.click(".tr-odd a");
             } else {
+              await page.waitForSelector(".tr-read-odd a");
               await page.click(".tr-read-odd a");
             }
             await page.waitForSelector("#reminder-message a");
@@ -1633,6 +1634,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             if ((await page.$(`.tr-odd`)) !== null) {
               await page.click(".tr-odd a");
             } else {
+              await page.waitForSelector(".tr-read-odd a");
               await page.click(".tr-read-odd a");
             }
             await page.waitForSelector("#reminder-message a");
