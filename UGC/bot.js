@@ -1575,7 +1575,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.click(".btn-tune.btn-login");
             await page.goto(CS_URL);
             // (await page.waitForSelector(".tr-read-odd")) ||
-            if (await page.waitForSelector(".tr-odd")) {
+            if ((await page.$(`.tr-odd`)) !== null) {
               await page.click(".tr-odd a");
             } else {
               await page.click(".tr-read-odd a");
@@ -1630,12 +1630,11 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.goto(CS_URL);
             // await page.fin;
             // (await page.waitForSelector(".tr-read-odd")) ||
-            if (await page.waitForSelector(".tr-odd")) {
+            if ((await page.$(`.tr-odd`)) !== null) {
               await page.click(".tr-odd a");
             } else {
               await page.click(".tr-read-odd a");
             }
-
             await page.waitForSelector("#reminder-message a");
             await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
