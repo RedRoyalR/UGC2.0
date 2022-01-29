@@ -338,6 +338,7 @@ const {
 } = require("discord.js");
 const ms = require("ms");
 const cron = require("node-cron");
+const Task = require("node-cron/src/task");
 const client = new Client({
   partials: ["MESSAGE", "REACTION"],
 });
@@ -1557,7 +1558,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       (async () => {
         /* Initiate the Puppeteer browser */
         const browser = await puppeteer.launch({
-          args: ["--no-sandbox", "--incognito"], //, "--disable-setuid-sandbox"
+          args: ["--no-sandbox", "--incognito", "--disable-setuid-sandbox"], //, "--disable-setuid-sandbox"
         });
         const page = await browser.newPage();
         /* Go to the IMDB Movie page and wait for it to load */
@@ -1620,7 +1621,6 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             //     Content: ${value2}
 
             // Time: *${value3}*`);
-            await browser.close;
           } else {
             await page.goto("https://sems.classtune.com");
             await page.waitForSelector(`#user_username`);
@@ -1628,12 +1628,14 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.type("#user_password", password);
             await page.click(".btn-tune.btn-login");
             await page.goto(CS_URL);
+            // await page.fin;
             // (await page.waitForSelector(".tr-read-odd")) ||
             if (await page.waitForSelector(".tr-odd")) {
               await page.click(".tr-odd a");
             } else {
               await page.click(".tr-read-odd a");
             }
+
             await page.waitForSelector("#reminder-message a");
             await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
@@ -1674,9 +1676,9 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             //     Content: ${value2}
 
             // Time: *${value3}*`);
-            await browser.close;
           }
         }
+        await browser.close();
       })().catch((err) => {
         message.reply(
           "Oh why the fuck can't you check it yourself fucker, I sure can't access it."
