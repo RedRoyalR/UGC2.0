@@ -1555,6 +1555,15 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       //   }
       // }
 
+      async function waitForSelectorSafe(page, selector) {
+        try {
+          await page.waitForSelector(selector, { timeout: 1 });
+          await page.click(selector);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       (async () => {
         /* Initiate the Puppeteer browser */
         const browser = await puppeteer.launch({
@@ -1578,11 +1587,11 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             if ((await page.$(`.tr-odd`)) !== null) {
               await page.click(".tr-odd a");
             } else {
-              await page.waitForSelector(".tr-read-odd a");
-              await page.click(".tr-read-odd a");
+              await waitForSelectorSafe(page, ".tr-read-odd a");
             }
-            await page.waitForSelector("#reminder-message a");
-            await page.click("#reminder-message a");
+            await waitForSelectorSafe(page, "#reminder-message a");
+            // await page.waitForSelector("#reminder-message a");
+            // await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
 
             await page.waitForSelector("#news_title");
@@ -1632,9 +1641,9 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             // await page.fin;
             // (await page.waitForSelector(".tr-read-odd")) ||
             if ((await page.$(`.tr-odd`)) !== null) {
-              await page.click(".tr-odd a");
+              await page.click(".tr-odd");
             } else {
-              await page.waitForSelector(".tr-read-odd a");
+              await page.waitForSelector(".tr-read-odd a", { timeout: 0 });
               await page.click(".tr-read-odd a");
             }
             await page.waitForSelector("#reminder-message a");
