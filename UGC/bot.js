@@ -1585,15 +1585,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.goto(CS_URL);
             // (await page.waitForSelector(".tr-read-odd")) ||
             let screenshot = await page.screenshot();
-            message.channel.send("Screenshot", { files: [screenshot] });
+            message.reply("Screenshot", { files: [screenshot] });
             const recordList = page.$$eval("#listing > tbody", (trows) => {
               let rowList = [];
               let index = 3;
               trows.forEach((row) => {
-                const tdList = Array.from(
-                  row.querySelectorAll("td"),
-                  (column) => column.innerText
-                ); // getting textvalue of each column of a row and adding them to a list.
+                const tdList = row; // getting textvalue of each column of a row and adding them to a list.
 
                 if (tdList.length >= 3 && tdList.length < index + 1) {
                   rowList.push(tdList[index]);
@@ -1662,15 +1659,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             // await page.fin;
             // (await page.waitForSelector(".tr-read-odd")) ||
             let screenshot = await page.screenshot();
-            message.channel.send("Screenshot", { files: [screenshot] });
+            message.reply("Screenshot", { files: [screenshot] });
             const recordList = page.$$eval("#listing > tbody", (trows) => {
               let rowList = [];
               let index = 3;
               trows.forEach((row) => {
-                const tdList = Array.from(
-                  row.querySelectorAll("td"),
-                  (column) => column.innerText
-                ); // getting textvalue of each column of a row and adding them to a list.
+                const tdList = row; // getting textvalue of each column of a row and adding them to a list.
 
                 if (tdList.length >= 3 && tdList.length < index + 1) {
                   rowList.push(tdList[index]);
