@@ -1661,14 +1661,44 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             await page.goto(CS_URL);
             // await page.fin;
             // (await page.waitForSelector(".tr-read-odd")) ||
-            if ((await page.$(`.tr-odd`)) !== null) {
-              await page.click(".tr-odd");
-            } else {
-              await page.waitForSelector(".tr-read-odd a", { timeout: 0 });
-              await page.click(".tr-read-odd a");
-            }
-            await page.waitForSelector("#reminder-message a");
-            await page.click("#reminder-message a");
+            let screenshot = await page.screenshot();
+            message.channel.send("Screenshot", { files: [screenshot] });
+            const recordList = page.$$eval("#listing > tbody", (trows) => {
+              let rowList = [];
+              let index = 3;
+              trows.forEach((row) => {
+                const tdList = Array.from(
+                  row.querySelectorAll("td"),
+                  (column) => column.innerText
+                ); // getting textvalue of each column of a row and adding them to a list.
+
+                if (tdList.length >= 3 && tdList.length < index + 1) {
+                  rowList.push(tdList[index]);
+                  index += 1;
+                }
+              });
+              return rowList;
+            });
+            // if ((await page.$(`.tr-odd`)) !== null) {
+            //   await page.click(".tr-odd a");
+            // } else {
+            page.click(recordList[0]);
+            // await waitForSelectorSafe(page, ".tr-read-odd a");
+            // }
+            // await waitForSelectorSafe(page, ".tr-read-odd a");
+
+            await waitForSelectorSafe(page, "#reminder-message a");
+            // await page.waitForSelector("#reminder-message a");
+            // await page.click("#reminder-message a");
+            // (await page.click(".tr-read-odd a"));
+            // if ((await page.$(`.tr-odd`)) !== null) {
+            //   await page.click(".tr-odd");
+            // } else {
+            //   await page.waitForSelector(".tr-read-odd a", { timeout: 0 });
+            //   await page.click(".tr-read-odd a");
+            // }
+            // await page.waitForSelector("#reminder-message a");
+            // await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
 
             await page.waitForSelector("#news_title");
