@@ -327,6 +327,7 @@ function Insult3(message) {
 const {
   Client,
   MessageEmbed,
+  SlashCommandBuilder,
   TextChannel,
   Emoji,
   Guild,
@@ -566,8 +567,32 @@ client.on("ready", () => {
   //   .then(console.log("IT WORKS!"))
   //   .catch((err) => console.log(err));
   UGCm = client.user;
-});
+  const guildID = "742991369370468382";
+  const guild = client.guilds.cache.get(guildID);
+  let commands;
+  if (guild) {
+    commands = guild.commands;
+  } else {
+    commands = client.application?.commands;
+  }
 
+  commands?.create({
+    name: "ping",
+    description: "replies with a pong.",
+  });
+});
+client.on("inviteCreate", async (interaction) => {
+  if (!interaction.isCommand()) {
+    return;
+  }
+  const { commandName, options } = interaction;
+  if (commandName === "ping") {
+    interaction.reply({
+      content: "pong",
+      ephemeral: true,
+    });
+  }
+});
 client.on("messageDelete", async (message) => {
   if (
     message.author.id == 806760433314562068 ||
@@ -1681,9 +1706,9 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             // }
             // await waitForSelectorSafe(page, ".tr-read-odd a");
 
-            await waitForSelectorSafe(page, "#reminder-message a");
+            // await waitForSelectorSafe(page, "#reminder-message a");
             // await page.waitForSelector("#reminder-message a");
-            // await page.click("#reminder-message a");
+            await page.click("#reminder-message a");
             // (await page.click(".tr-read-odd a"));
             // if ((await page.$(`.tr-odd`)) !== null) {
             //   await page.click(".tr-odd");
