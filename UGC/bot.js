@@ -10,7 +10,7 @@ const NGLUsername = "323-101900";
 const NGLPassword = "123456";
 const CS_URL = `https://sems.classtune.com/reminder`;
 let cooldown = true;
-const versionValue = "57.36.23";
+const versionValue = "59.36.23";
 const desc = `
 /// Moderation (Admins only!)
 1. $kick [Mention/UserId]
@@ -567,6 +567,7 @@ client.on("ready", () => {
   //   .then(console.log("IT WORKS!"))
   //   .catch((err) => console.log(err));
   UGCm = client.user;
+
   const guildID = "742991369370468382";
   const guild = client.guilds.cache.get(guildID);
   let commands;
