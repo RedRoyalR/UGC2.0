@@ -311,26 +311,23 @@ const Insults3 = [
 ];
 function Insult(message) {
   const rng = Math.trunc(Math.random() * Insults.length);
-  message.reply(`. ${Insults[rng]}`);
+  message.reply(Insults[rng]);
 }
 function Insult2(message) {
   const rng = Math.trunc(Math.random() * Insults2.length);
-  message.reply(`. ${Insults2[rng]}`);
+  message.reply(Insults2[rng]);
 }
 function Insult3(message) {
   const rng = Math.trunc(Math.random() * Insults3.length);
-  message.reply(`. ${Insults3[rng]}`);
+  message.reply(Insults3[rng]);
 }
 
 // require("dotenv").config();
 
 const {
   Client,
-  EmbedBuilder,
-  Partials,
-  Events,
-  GatewayIntentBits,
-  ActivityType,
+  MessageEmbed,
+  SlashCommandBuilder,
   TextChannel,
   Emoji,
   Guild,
@@ -340,24 +337,12 @@ const {
   MessageManager,
   Message,
 } = require("discord.js");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
 const ms = require("ms");
 const cron = require("node-cron");
 const Task = require("node-cron/src/task");
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
-  partials: [
-    Partials.User, // We want to receive uncached users!
-    Partials.Message, // We want to receive uncached messages!
-  ],
+  partials: ["MESSAGE", "REACTION"],
 });
-const fs = require("node:fs");
-const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const birthdays = new Map();
 birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
@@ -564,17 +549,18 @@ client.on("ready", () => {
   //   .then(console.log("IT WORKS!"))
   //   .catch((err) => console.log(err));
 
-  client.user.setPresence({
-    activity: {
-      status: "dnd",
-      name: ` $help in for Interactions | by Rederuption™`,
+  client.user
+    .setPresence({
+      activity: {
+        status: "Do Not Disturb",
+        name: `$help in for Interactions | by Rederuption™`,
 
-      // name: `ROBLOX`,
-      type: 0,
-    },
-  });
-  // .then(console.log("IT WORKS!"))
-  // .catch((err) => console.log(err));
+        // name: `ROBLOX`,
+        type: 0,
+      },
+    })
+    .then(console.log("IT WORKS!"))
+    .catch((err) => console.log(err));
 
   // client.user
   //   .setStatus("dnd", "Ho Ho fuck you! Your in the naughty list fucker.")
@@ -596,15 +582,15 @@ client.on("ready", () => {
     description: "replies with a pong.",
   });
 });
-client.on("interactionCreate", async (interaction) => {
+client.on("inviteCreate", async (interaction) => {
   if (!interaction.isCommand()) {
     return;
   }
   const { commandName, options } = interaction;
   if (commandName === "ping") {
-    await interaction.reply({
+    interaction.reply({
       content: "pong",
-      ephemeral: false,
+      ephemeral: true,
     });
   }
 });
@@ -616,7 +602,7 @@ client.on("messageDelete", async (message) => {
     return;
 
   const loges = message.guild.channels.cache.find((ch) => ch.name === "logs");
-  const embede = new EmbedBuilder()
+  const embede = new MessageEmbed()
     .setTitle(`User: ${message.author.tag} ID: ${message.author.id} `)
     .setDescription(
       `
@@ -641,7 +627,7 @@ client.on("messageUpdate", async (message, edit) => {
   )
     return;
   const loges = message.guild.channels.cache.find((ch) => ch.name === "logs");
-  const embede = new EmbedBuilder()
+  const embede = new MessageEmbed()
     .setTitle(`User: ${message.author.tag} ID: ${message.author.id} `)
     // .setThumbnail(message.author.avatar)
     .setDescription(
@@ -664,8 +650,7 @@ client.on("messageUpdate", async (message, edit) => {
     loges.send(embede);
   }
 });
-// client.addListener(Message)
-client.on("messageCreate", async (message) => {
+client.on("message", async (message) => {
   if (
     message.author.id == 806760433314562068 ||
     message.author.id == 155149108183695360
@@ -683,7 +668,7 @@ client.on("messageCreate", async (message) => {
         CMD_NAME.toLowerCase() === "commands"
       ) {
         //if (message.channel.name === botChannel) {
-        const embed = new EmbedBuilder()
+        const embed = new MessageEmbed()
           .setTitle(`**BOT COMMANDS!**`)
           .setDescription(desc) //
           .setColor("664791")
@@ -698,7 +683,7 @@ Version: ${versionValue}`); //first 2 digits are a huge change, the second 2 are
         CMD_NAME.toLowerCase() === "version" ||
         CMD_NAME.toLowerCase() === "status"
       ) {
-        const embed = new EmbedBuilder();
+        const embed = new MessageEmbed();
         embed.setTitle(`**Version**`);
         embed.setDescription(`Version: ${versionValue}`);
         embed.setTimestamp(message.createdAt);
@@ -848,7 +833,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
     return;
   }
   const loges = message.guild.channels.cache.find((ch) => ch.name === "logs");
-  const embede = new EmbedBuilder()
+  const embede = new MessageEmbed()
     .setTitle(`User: ${message.author.tag} ID: ${message.author.id} `)
     // .setThumbnail(message.author.avatarURL)
     .setDescription(
@@ -858,15 +843,15 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
     `
     )
     .setColor("#8e837c")
-    .setFooter({
-      text: `
-      ${message.channel.name}
-  
-      `,
-    })
+    .setFooter(
+      `
+    ${message.channel.name}
+
+    `
+    )
     .setTimestamp(message.createdAt);
   if (loges) {
-    loges.send(`.${embede}`);
+    loges.send(embede);
   }
   if (message.content.startsWith(PREFIX)) {
     const [CMD_NAME, ...args] = message.content
@@ -958,17 +943,15 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         CMD_NAME.toLowerCase() === "commands"
       ) {
         //if (message.channel.name === botChannel) {
-        const embed = new EmbedBuilder()
+        const embed = new MessageEmbed()
           .setTitle(`**BOT COMMANDS!**`)
           .setDescription(desc) //
           .setColor("664791")
-          .setFooter({
-            text: ` **NOTE: ALL FUN BASED COMMANDS ARE FULL RANDOM, AND CAN NOT BE PREDICTED!**
+          .setFooter(` **NOTE: ALL FUN BASED COMMANDS ARE FULL RANDOM, AND CAN NOT BE PREDICTED!**
 Info:
 Creator: RedRoyalR aka Rederuption™#4462
 Type: Moderation + Fun + Miscellaneous + "Always Learning"
-Version: ${versionValue}`,
-          }); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
+Version: ${versionValue}`); //first 2 digits are a huge change, the second 2 are a new feature, and last 2 are bug fixes or patches.
         const rng = Math.trunc(Math.random() * 3) + 1; //formula for getting random number
         if (rng == 1) {
           message.author.send(embed);
@@ -980,7 +963,7 @@ Version: ${versionValue}`,
         CMD_NAME.toLowerCase() === "version" ||
         CMD_NAME.toLowerCase() === "status"
       ) {
-        const embed = new EmbedBuilder();
+        const embed = new MessageEmbed();
         embed.setTitle(`**Version**`);
         embed.setDescription(`Version: ${versionValue}`);
         embed.setTimestamp(message.createdAt);
@@ -995,7 +978,7 @@ Version: ${versionValue}`,
         console.log(eachLine);
         if (eachLine.length < 1)
           return message.reply("You need atleast more than 1 option!");
-        const embed = new EmbedBuilder();
+        const embed = new MessageEmbed();
         const test14 = new Date();
         const options = {
           weekday: "long",
@@ -1203,7 +1186,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
       ) {
         if (message.channel.name === botChannel) {
           if (args.length === 0) {
-            const embed = new EmbedBuilder()
+            const embed = new MessageEmbed()
               .setTitle(`Avatar:`)
               .setAuthor(`${message.author.tag}`)
               .setColor("664791")
@@ -1216,7 +1199,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
               : client.users.cache.find((user) => user.id === args[0]);
             // console.log(user);
             if (user) {
-              const embed = new EmbedBuilder()
+              const embed = new MessageEmbed()
                 .setTitle(`Avatar:`)
                 .setAuthor(`${user.tag}`)
                 .setColor("664791")
@@ -1239,12 +1222,12 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
         }
       } else if (CMD_NAME.toLowerCase() === "embed") {
         if (message.channel.name === botChannel) {
-          // We can create embeds using the EmbedBuilder  constructor
+          // We can create embeds using the MessageEmbed constructor
           // Read more about all that you can do with the constructor
-          // over at https://discord.js.org/#/docs/main/master/class/EmbedBuilder
+          // over at https://discord.js.org/#/docs/main/master/class/MessageEmbed
           if (args.length === 0)
             return message.reply("Please provide an title!");
-          const embed = new EmbedBuilder();
+          const embed = new MessageEmbed();
           // Set the title of the field
 
           embed.setTitle(`${args[0]}`);
@@ -1678,7 +1661,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             //   return title;
             // });
             // console.log(data);
-            const embed = new EmbedBuilder()
+            const embed = new MessageEmbed()
               .setTitle(`**Title: ${value}**`)
               .setDescription(`Content: ${value2}`) //
               .setColor("664791")
@@ -1761,7 +1744,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
             //   return title;
             // });
             // console.log(data);
-            const embed = new EmbedBuilder()
+            const embed = new MessageEmbed()
               .setTitle(`**Title: ${value}**`)
               .setDescription(`Content: ${value2}`) //
               .setColor("664791")
@@ -2329,7 +2312,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
           if (!item) {
             item = "No title";
           }
-          var embed = new EmbedBuilder();
+          var embed = new MessageEmbed();
           embed.setColor(0x3333ff);
           embed.setTitle("New Giveaway !");
           embed.setDescription("**" + item + "**");

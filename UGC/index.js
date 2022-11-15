@@ -311,15 +311,15 @@ const Insults3 = [
 ];
 function Insult(message) {
   const rng = Math.trunc(Math.random() * Insults.length);
-  message.reply(`. ${Insults[rng]}`);
+  message.reply(Insults[rng]);
 }
 function Insult2(message) {
   const rng = Math.trunc(Math.random() * Insults2.length);
-  message.reply(`. ${Insults2[rng]}`);
+  message.reply(Insults2[rng]);
 }
 function Insult3(message) {
   const rng = Math.trunc(Math.random() * Insults3.length);
-  message.reply(`. ${Insults3[rng]}`);
+  message.reply(Insults3[rng]);
 }
 
 // require("dotenv").config();
@@ -331,6 +331,7 @@ const {
   Events,
   GatewayIntentBits,
   ActivityType,
+  SlashCommandBuilder,
   TextChannel,
   Emoji,
   Guild,
@@ -340,8 +341,6 @@ const {
   MessageManager,
   Message,
 } = require("discord.js");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
 const ms = require("ms");
 const cron = require("node-cron");
 const Task = require("node-cron/src/task");
@@ -356,9 +355,6 @@ const client = new Client({
     Partials.Message, // We want to receive uncached messages!
   ],
 });
-const fs = require("node:fs");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 const birthdays = new Map();
 birthdays.set("354579634395938817", { month: "Oct", day: 1 }); //Red
 birthdays.set("398091045616746506", { month: "Jan", day: 16 }); //Fade
@@ -596,15 +592,15 @@ client.on("ready", () => {
     description: "replies with a pong.",
   });
 });
-client.on("interactionCreate", async (interaction) => {
+client.on("inviteCreate", async (interaction) => {
   if (!interaction.isCommand()) {
     return;
   }
   const { commandName, options } = interaction;
   if (commandName === "ping") {
-    await interaction.reply({
+    interaction.reply({
       content: "pong",
-      ephemeral: false,
+      ephemeral: true,
     });
   }
 });
@@ -866,7 +862,7 @@ Note: Bare in mind I am extremely egotistical, and hate getting insulted or ment
     })
     .setTimestamp(message.createdAt);
   if (loges) {
-    loges.send(`.${embede}`);
+    loges.send(embede);
   }
   if (message.content.startsWith(PREFIX)) {
     const [CMD_NAME, ...args] = message.content
